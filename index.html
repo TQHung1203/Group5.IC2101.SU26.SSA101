@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The MBTI Playground - Học Thuật & Cá Nhân Hóa</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="data:,">
+</head>
+<body>
+
+    <header>
+        <div class="container navbar">
+            <div class="logo" id="nav-logo" style="cursor: pointer;">The <span>MBTI</span> Playground</div>
+            <nav>
+                <ul>
+                    <li><a href="#" id="nav-home">Trang chủ</a></li>
+                    <li><a href="#" id="nav-quiz">Làm Trắc Nghiệm</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main id="home-view">
+        <section id="hero" class="hero-section">
+            <div class="container hero-content">
+                <h1>Thấu hiểu bản thân,<br>Bứt phá điểm số đại học</h1>
+                <p>Khám phá phong cách nhận thức của bạn qua bộ câu hỏi MBTI tối ưu dành riêng cho sinh viên. Nhận ngay chiến lược học tập, phương pháp quản lý tiến độ và mẹo xả stress hiệu quả nhất.</p>
+                <button id="start-quiz-btn" class="btn-primary">Bắt đầu khám phá ngay</button>
+            </div>
+        </section>
+    </main>
+
+    <main id="instructions-view" style="display: none;">
+        <section class="quiz-section" style="padding-top: 100px;">
+            <div class="container" style="max-width: 700px;">
+                <div class="result-box" style="border-top: 6px solid #0056b3;">
+                    <div style="text-align: center; margin-bottom: 25px;">
+                        <span style="font-size: 3rem;">📝</span>
+                        <h2 style="font-size: 1.8rem; color: #1a202c; margin-top: 10px;">Hướng Dẫn Thực Hiện Trắc Nghiệm</h2>
+                        <p style="color: #718096; font-size: 0.95rem;">Để nhận được kết quả phân tích phong cách học tập chính xác nhất, bạn vui lòng lưu ý 3 nguyên tắc vàng sau:</p>
+                    </div>
+
+                    <div style="text-align: left; margin-bottom: 30px;">
+                        <div style="display: flex; margin-bottom: 20px; align-items: flex-start;">
+                            <div style="background: #ebf8ff; color: #2b6cb0; font-weight: bold; padding: 8px 14px; border-radius: 50%; margin-right: 15px; flex-shrink: 0;">1</div>
+                            <div>
+                                <h4 style="color: #2d3748; margin-bottom: 4px;">Trả lời theo bản năng thực tế</h4>
+                                <p style="color: #4a5568; font-size: 0.95rem;">Hãy chọn đáp án mô tả đúng nhất **cách bạn đang hành động trong thực tế**, thay vì chọn đáp án mà bạn "nghĩ là mình nên làm thế".</p>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; margin-bottom: 20px; align-items: flex-start;">
+                            <div style="background: #ebf8ff; color: #2b6cb0; font-weight: bold; padding: 8px 13px; border-radius: 50%; margin-right: 15px; flex-shrink: 0;">2</div>
+                            <div>
+                                <h4 style="color: #2d3748; margin-bottom: 4px;">Đừng suy nghĩ quá lâu</h4>
+                                <p style="color: #4a5568; font-size: 0.95rem;">Mỗi tình huống đưa ra đều rất gần gũi với đời sống sinh viên. Hãy chọn ngay phương án đầu tiên khiến bạn cảm thấy thoải mái và tự nhiên nhất.</p>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; margin-bottom: 20px; align-items: flex-start;">
+                            <div style="background: #ebf8ff; color: #2b6cb0; font-weight: bold; padding: 8px 13px; border-radius: 50%; margin-right: 15px; flex-shrink: 0;">3</div>
+                            <div>
+                                <h4 style="color: #2d3748; margin-bottom: 4px;">Hoàn thành trọn vẹn trong một lượt</h4>
+                                <p style="color: #4a5568; font-size: 0.95rem;">Bài trắc nghiệm được chia thành **4 trang (mỗi trang 10 câu)**. Hãy giữ sự tập trung và hoàn thành liên tục để mạch tư duy không bị gián đoạn.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="counseling-notice" style="background: #f7fafc; border: 1px solid #e2e8f0; text-align: left; font-size: 0.9rem; color: #4a5568;">
+                        💡 <strong>Thông tin thêm:</strong> Bài test gồm 40 câu hỏi được tinh gọn và trộn ngẫu nhiên. Hệ thống sẽ tự động hiển thị thanh tiến trình trực quan để bạn theo dõi.
+                    </div>
+
+                    <div style="text-align: center; margin-top: 25px;">
+                        <button id="confirm-start-btn" class="btn-submit" style="width: 100%; padding: 14px;">Tôi đã sẵn sàng, Bắt đầu làm bài</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <main id="quiz-view" style="display: none;">
+        <section id="quiz-section" class="quiz-section">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Trắc Nghiệm Xu Hướng Học Tập</h2>
+                    <p>Vui lòng trả lời các câu hỏi dưới đây một cách tự nhiên nhất. Các câu hỏi được trộn ngẫu nhiên để đảm bảo tính khách quan (Bộ câu hỏi gồm 40 câu).</p>
+                    <div class="progress-container" style="background: #e0e0e0; border-radius: 10px; height: 8px; margin: 20px auto; max-width: 600px; width: 100%;">
+                        <div id="progress-bar" style="background: #0056b3; border-radius: 10px; height: 100%; width: 0%; transition: width 0.3s ease;"></div>
+                    </div>
+                </div>
+
+                <div id="quiz-questions-render"></div>
+            </div>
+        </section>
+    </main>
+
+    <main id="result-view" style="display: none;">
+        <div id="disclaimer-modal" class="modal-overlay" style="display: none;">
+            <div class="modal-content">
+                <div class="modal-icon">⚠️</div>
+                <h3>Thông Báo Quan Trọng</h3>
+                <p>Kết quả trắc nghiệm MBTI tại <strong>The MBTI Playground</strong> được tối ưu hóa nhằm hỗ trợ sinh viên khám phá xu hướng học tập và quản lý áp lực học đường.</p>
+                <p class="modal-highlight">Thông tin này chỉ mang tính chất tham khảo, không thay thế cho các tư vấn chuyên môn, định hướng chuyên sâu hoặc chẩn đoán tâm lý y khoa.</p>
+                <button id="close-modal-btn" class="btn-submit" style="width: 100%; margin-top: 15px;">Tôi đã hiểu và đồng ý</button>
+            </div>
+        </div>
+
+        <section class="quiz-section">
+            <div class="container">
+                <div id="result-box" class="result-box">
+                    <div class="result-header">
+                        <h3>Kết quả của bạn: <span id="mbti-type">INTJ</span></h3>
+                        <p class="tagline" id="mbti-tagline">"Nhà Chiến Lược Tài Ba"</p>
+                    </div>
+
+                    <div class="mbti-stats-container" style="margin-bottom: 30px; background: #f8fafc; padding: 25px; border-radius: 12px; border: 1px solid #e2e8f0;">
+                        <h4 style="margin-bottom: 20px; color: #2d3748; text-align: center; font-size: 1.1rem; font-weight: 700;">📊 Tỷ Lệ Các Thành Phần Xu Hướng Của Bạn</h4>
+                        
+                        <div class="stat-row">
+                            <span class="stat-label-left">Extraverted (E)</span>
+                            <div class="stat-bar-bg">
+                                <div id="bar-ei" class="stat-bar-fill fill-ei"></div>
+                                <div id="dot-ei" class="stat-dot"></div>
+                                <span id="text-ei" class="stat-percentage-text text-color-ei">50%</span>
+                            </div>
+                            <span class="stat-label-right">(I) Introverted</span>
+                        </div>
+
+                        <div class="stat-row">
+                            <span class="stat-label-left">Sensing (S)</span>
+                            <div class="stat-bar-bg">
+                                <div id="bar-sn" class="stat-bar-fill fill-sn"></div>
+                                <div id="dot-sn" class="stat-dot"></div>
+                                <span id="text-sn" class="stat-percentage-text text-color-sn">50%</span>
+                            </div>
+                            <span class="stat-label-right">(N) Intuition</span>
+                        </div>
+
+                        <div class="stat-row">
+                            <span class="stat-label-left">Thinking (T)</span>
+                            <div class="stat-bar-bg">
+                                <div id="bar-tf" class="stat-bar-fill fill-tf"></div>
+                                <div id="dot-tf" class="stat-dot"></div>
+                                <span id="text-tf" class="stat-percentage-text text-color-tf">50%</span>
+                            </div>
+                            <span class="stat-label-right">(F) Feeling</span>
+                        </div>
+
+                        <div class="stat-row">
+                            <span class="stat-label-left">Judging (J)</span>
+                            <div class="stat-bar-bg">
+                                <div id="bar-jp" class="stat-bar-fill fill-jp"></div>
+                                <div id="dot-jp" class="stat-dot"></div>
+                                <span id="text-jp" class="stat-percentage-text text-color-jp">50%</span>
+                            </div>
+                            <span class="stat-label-right">(P) Prospecting</span>
+                        </div>
+                    </div>
+
+                    <div class="result-grid">
+                        <div class="result-card">
+                            <h4>💡 Phương Phách Học Tập Cá Nhân Hóa</h4>
+                            <p id="mbti-learning">Đang tải phân tích...</p>
+                        </div>
+                        <div class="result-card">
+                            <h4>🌿 Chiến Lược Quản Lý Căng Thẳng</h4>
+                            <p id="mbti-stress">Đang tải phân tích...</p>
+                        </div>
+                    </div>
+
+                    <div class="counseling-notice">
+                        <p>⚠️ <strong>Góc chia sẻ:</strong> Nếu áp lực học tập vượt quá tầm kiểm soát, đừng ngần ngại kết nối trực tiếp và ẩn danh với <a href="#" target="_blank">Phòng Tham vấn Tâm lý của Nhà Trường</a> để nhận được sự đồng hành từ các chuyên gia.</p>
+                    </div>
+
+                    <div class="feedback-section">
+                        <h4>📊 Trải nghiệm của bạn thế nào?</h4>
+                        <p>Hãy dành 30 giây giúp nhóm mình hoàn thiện dự án bằng cách điền đánh giá ngắn này nhé!</p>
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLScCKvyUIozrqfm9fC-DU4Xn7LvWuo888_g9Nh4XIeL5F3RusQ/viewform?usp=dialog" target="_blank" class="btn-feedback">Đóng góp ý kiến (Ẩn danh)</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="dev-panel" style="display: none; position: fixed; bottom: 20px; right: 20px; background: #2d3748; color: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); z-index: 9999; max-width: 300px; font-family: monospace; font-size: 12px;">
+        <h4 style="margin-bottom: 8px; color: #3182ce; border-bottom: 1px solid #4a5568; padding-bottom: 4px;">🛠️ DEVELOPER MODE</h4>
+        <p>Trạng thái: <span style="color: #48bb78;">Active</span></p>
+        <div style="margin-top: 10px;">
+            <button id="dev-auto-fill" style="background: #3182ce; color: #fff; border: none; padding: 6px 10px; border-radius: 4px; cursor: pointer; width: 100%; font-weight: bold;">Tự động điền nhanh 40 câu</button>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container text-center">
+            <p>&copy; 2026 The MBTI Playground. Developed with 💙 for Academic Skills Project.</p>
+        </div>
+    </footer>
+
+    <script>
+        const rawQuestions = [
+            // --- NHÓM E vs I ---
+            { category: "EI", q: "Trong buổi đầu một môn học mới, bạn thoải mái nhất với cách kết nối nào?", a: "Chủ động bắt chuyện với các bạn mới xung quanh để tạo không khí sôi nổi.", av: "E", b: "Lặng lẽ quan sát, ưu tiên ngồi cạnh hoặc thảo luận với những người đã quen từ trước.", bv: "I" },
+            { category: "EI", q: "Khi tham gia tiệc liên hoan lớp hoặc sinh nhật, bạn thường thế nào khi trời về muộn?", a: "Vẫn tràn đầy năng lượng, muốn vui vẻ cùng mọi người đến phút cuối mới về.", av: "E", b: "Cảm thấy 'cạn pin', muốn chào mọi người ra về sớm để tận hưởng không gian yên tĩnh riêng.", bv: "I" },
+            { category: "EI", q: "Khi group chat của lớp nổ thông báo về tin tức mới, bạn thường ở trạng thái nào?", a: "Đọc được tin nhắn ngay lập tức và sẵn sàng thảo luận, phản hồi ngay với mọi người.", av: "E", b: "Đợi khi rảnh rỗi mới vào đọc một lượt, hoặc chỉ tìm kiếm khi tin tức liên quan trực tiếp.", bv: "I" },
+            { category: "EI", q: "Khi cần gọi điện trao đổi công việc (hẹn lịch giảng viên, hỏi bài khóa trên...), bạn sẽ:", a: "Bấm số gọi ngay lập tức, cần nói gì sẽ tự khắc ứng biến theo mạch cuộc trò chuyện.", av: "E", b: "Nhẩm nhanh trong đầu vài câu mở đầu hoặc các ý chính cần nói trước khi bấm máy.", bv: "I" },
+            { category: "EI", q: "Khi ngồi vào bàn ăn chung ở căn-tin với những người bạn mới quen, bạn thường làm gì?", a: "Chủ động lên tiếng trước, khơi mào các chủ đề vui vẻ để phá tan bầu không khí.", av: "E", b: "Lắng nghe trước, đợi một ai đó mở lời, khi có chủ đề phù hợp mới tham gia vào.", bv: "I" },
+            { category: "EI", q: "Khi bước vào học kỳ mới với phương pháp giảng dạy hoàn toàn mới lạ, năng lượng của bạn ra sao?", a: "Phấn chấn và hào hứng: Sẵn sàng bắt nhịp ngay, thích thú trải nghiệm môi trường mới.", av: "E", b: "Cần thời gian quan sát: Thích cách học ổn định hơn, cần vài tuần đầu để thích nghi từ từ.", bv: "I" },
+            { category: "EI", q: "Khi ngồi một mình ở khu tự học, một bạn cùng khóa (chưa từng nói chuyện) bất ngờ đến bắt chuyện, bạn sẽ:", a: "Thoải mái đón nhận: Vui vẻ mỉm cười lại, sẵn sàng trò chuyện ngay để kết giao bạn mới.", av: "E", b: "Cẩn trọng e dè: Cảm thấy hơi bất ngờ, lúng túng, cần vài giây quan sát rồi mới từ từ bắt nhịp.", bv: "I" },
+            { category: "EI", q: "Bạn đánh giá bản thân thuộc kiểu kết giao bạn bè nào dưới đây?", a: "Xã giao rộng, dễ dàng giữ liên lạc và trò chuyện được với nhiều nhóm bạn khác nhau.", av: "E", b: "Khép kín hơn, ít bạn bè nhưng mối quan hệ cực kỳ sâu sắc và tình cảm khăng khít.", bv: "I" },
+            { category: "EI", q: "Khi tự đánh giá một cách thẳng thắn về bản thân, bạn nhận thấy mình là người:", a: "Cởi mở, dễ gần, thoải mái bộc lộ suy nghĩ của mình ra bên ngoài.", av: "E", b: "Thân thiện nhưng kín đáo, giữ những tâm sự quan trọng cho riêng mình.", bv: "I" },
+            { category: "EI", q: "Khi có thời gian rảnh rỗi sau một tuần học tập căng thẳng, hoạt động nào giúp bạn hồi pin tốt nhất?", a: "Ra ngoài tụ tập, đi chơi, cà phê hoặc tham gia các hoạt động náo nhiệt cùng bạn bè.", av: "E", b: "Ở nhà xem phim, đọc sách, nghe nhạc hoặc làm sở thích cá nhân trong không gian riêng.", bv: "I" },
+
+            // --- NHÓM S vs N ---
+            { category: "SN", q: "Khi tự học một kiến thức mới trên mạng, bạn thích kiểu video hướng dẫn nào hơn?", a: "Video ngắn gọn, đi thẳng vào các bước thực hành từng bước một để bắt chước làm theo ngay.", av: "S", b: "Video giải thích rõ lý do tại sao lại làm vậy và nguyên lý hoạt động cốt lõi phía sau.", bv: "N" },
+            { category: "SN", q: "Khi ngồi nghe một bài giảng trên lớp, điều gì khiến bạn dễ tụt hứng học tập nhất?", a: "Giảng viên chỉ nói lý thuyết suông vĩ mô, xa rời thực tế và không rõ ứng dụng làm gì.", av: "S", b: "Giảng viên cứ lặp đi lặp lại nội dung cũ kỹ, rập khuôn, không khơi gợi sáng tạo.", bv: "N" },
+            { category: "SN", q: "Khi tìm kiếm đồng đội để lập nhóm làm bài tập lớn, kiểu người nào khiến bạn hào hứng hợp tác nhất?", a: "Một người thực tế, luôn bám sát yêu cầu đề bài và có kế hoạch thực hiện khả thi.", av: "S", b: "Một người giàu ý tưởng, có tư duy đột phá, luôn nghĩ ra những góc nhìn độc lạ.", bv: "N" },
+            { category: "SN", q: "Khi lướt các kênh video chia sẻ kiến thức, thể loại nội dung nào dễ giữ chân bạn hơn?", a: "Phân tích các sự kiện lịch sử, tình huống có thật hoặc các case study thực tế đã diễn ra.", av: "S", b: "Dự đoán về xu hướng tương lai, các giả thuyết khoa học hoặc tiềm năng phát triển.", bv: "N" },
+            { category: "SN", q: "Khi được thầy cô truyền đạt một phương pháp giải bài hoặc quy trình chuẩn mực, bạn xu hướng:", a: "Tập trung ghi nhớ và áp dụng chính xác theo hướng dẫn để kết quả an toàn, chuẩn xác.", av: "S", b: "Vừa học vừa tò mò tự hỏi xem còn cách nào khác tối ưu hơn không để cải tiến.", bv: "N" },
+            { category: "SN", q: "Khi được tự do lựa chọn đề tài cho một bài tiểu luận, bạn bị thu hút bởi kiểu đề tài nào?", a: "Mang tính thực tiễn: Tập trung phân tích số liệu sẵn có, khảo sát hoặc giải quyết sự cố cụ thể.", av: "S", b: "Mang tính định hướng: Nghiên cứu mô hình lý thuyết, tìm tòi ý tưởng mới hoặc dự đoán tương lai.", bv: "N" },
+            { category: "SN", q: "Khi gặp câu hỏi cực khó trong bài thi trắc nghiệm buộc phải khoanh bừa, bạn sẽ:", a: "Khoanh dựa trên loại trừ: Phân tích dữ kiện, loại câu phi lý, tìm phương án xác suất cao.", av: "S", b: "Khoanh dựa trên cảm giác: Tin vào trực giác từ cái nhìn đầu tiên, chọn câu có linh cảm tốt.", bv: "N" },
+            { category: "SN", q: "Khi nhóm bài tập lớn gặp sự cố bất ngờ sát ngày nộp, bạn xu hướng đề xuất phương án nào?", a: "Phương án thực dụng: Chữa cháy nhanh gọn, dùng nguồn lực sẵn có để kịp tiến độ nộp bài.", av: "S", b: "Phương án cải tiến: Đề xuất cách làm đột phá thay đổi tận gốc, chấp nhận thức đêm xử lý.", bv: "N" },
+            { category: "SN", q: "Khi tham gia phân tích một bài tập tình huống (case study) phức tạp, bạn tự tin vào năng lực nào?", a: "Phân tích chi tiết: Khảo sát kỹ lưỡng các số liệu, dẫn chứng thực tế và lập luận thực chứng.", av: "S", b: "Kết nối tổng quan: Nhìn nhận vấn đề toàn cảnh, nhanh chóng phát hiện mối liên hệ ẩn.", bv: "N" },
+            { category: "SN", q: "Khi viết một bài tiểu luận hoặc báo cáo môn học, bạn thường dùng phong cách ngôn từ nào hơn?", a: "Trực diện và thực tế: Cung cấp số liệu chính xác, dẫn chứng cụ thể đời thực, rõ ràng.", av: "S", b: "Khái quát và gợi mở: Làm nổi bật bức tranh tổng thể, sử dụng hình ảnh ẩn dụ vĩ mô.", bv: "N" },
+
+            // --- NHÓM T vs F ---
+            { category: "TF", q: "Khi nghe một bài thuyết trình của nhóm khác trên lớp, điều gì khiến bạn bị thuyết phục nhất?", a: "Bài làm có lập luận sắc bén, số liệu rõ ràng và các luận điểm sắp xếp logic.", av: "T", b: "Bài làm có câu chuyện truyền cảm hứng, cách dẫn dắt lôi cuốn chạm cảm xúc.", bv: "F" },
+            { category: "TF", q: "Khi nhóm đang tranh luận nảy lửa để đưa ra quyết định chung, bạn dễ bị thuyết phục bởi:", a: "Những ý kiến dựa trên số liệu thực tế, phân tích ưu-nhược điểm rõ ràng, sắc bén.", av: "T", b: "Những ý kiến thấu hiểu tâm lý số đông, giữ gìn sự hòa nhập và không khí vui vẻ.", bv: "F" },
+            { category: "TF", q: "Sau vài buổi làm việc nhóm đầu tiên, bạn dựa vào điều gì để đánh giá một thành viên mới?", a: "Hiệu quả công việc thực tế, sự đúng giờ và mức độ hoàn thành nhiệm vụ của họ.", av: "T", b: "Thái độ, sự hòa đồng, năng lượng họ tỏa ra khi tương tác với tập thể.", bv: "F" },
+            { category: "TF", q: "Khi nhà trường hoặc giảng viên đưa ra các nội quy nghiêm khắc trên lớp, bạn đồng tình với góc nhìn nào?", a: "Mọi quy định cần thực thi nghiêm chỉnh và công bằng với tất cả mọi người, không ngoại lệ.", av: "T", b: "Quy định chỉ là khung sườn, cần xem xét hoàn cảnh bất khả kháng của từng cá nhân.", bv: "F" },
+            { category: "TF", q: "Khi một người bạn thân tìm đến để xin lời khuyên về một quyết định, bạn thường sẽ:", a: "Phân tích thẳng vào thực tế: Liệt kê rõ điểm lợi - hại, tính toán thiệt hơn logic.", av: "T", b: "Lắng nghe và đồng cảm: Giúp bạn ấy hiểu rõ bản thân thực sự muốn gì để hạnh phúc.", bv: "F" },
+            { category: "TF", q: "Khi chọn mua một món đồ công nghệ phục vụ học tập, bạn bị thuyết phục bởi yếu tố nào hơn?", a: "Tính đa năng và độ bền: Có nhiều tính năng tiện lợi, độ bền cao, bảo vệ an toàn.", av: "T", b: "Thiết kế và cảm xúc: Ngoại hình đẹp mắt, màu sắc đúng gu, thể hiện cá tính riêng.", bv: "F" },
+            { category: "TF", q: "Khi hai người bạn trong nhóm xảy ra bất đồng và tranh luận gay gắt, vai trò của bạn là gì?", a: "Tập trung đúng - sai: Thẳng thắn chỉ ra lỗi sai của từng bên dựa trên quy định chung.", av: "T", b: "Tập trung hòa giải: Tìm cách xoa dịu không khí, giúp hai bên thông cảm cho nhau.", bv: "F" },
+            { category: "TF", q: "Khi tập thể vượt qua giai đoạn chạy nước rút áp lực của dự án, bạn tự tin nhất vào giá trị nào?", a: "Khả năng giữ cái đầu lạnh: Luôn tỉnh táo, kiên định mục tiêu khách quan, lý trí.", av: "T", b: "Khả năng giữ lửa cho đội ngũ: Sẵn sàng dốc tâm sức giữ gìn sự gắn kết đồng đội.", bv: "F" },
+            { category: "TF", q: "Khi đóng vai trò là Trưởng nhóm điều hành dự án môn học, bạn sợ đối mặt với thử thách nào nhất?", a: "Khả năng thấu cảm cá nhân: Phải dành thời gian lắng nghe tâm tư khó khăn riêng của từng người.", av: "T", b: "Khả năng gạt bỏ tình cảm: Phải lạnh lùng kỷ luật hoặc phê bình thành viên làm việc yếu.", bv: "F" },
+            { category: "TF", q: "Khi cùng làm bài tập lớn với một tập thể, tình huống nào khiến bạn ức chế nhiều hơn?", a: "Sự cẩu thả trong công việc: Thành viên làm hời hợt gây sai sót ảnh hưởng điểm cả đội.", av: "T", b: "Sự nặng nề trong giao tiếp: Khi có lỗi, các thành viên phê phán gay gắt tổn thương nhau.", bv: "F" },
+
+            // --- NHÓM J vs P ---
+            { category: "JP", q: "Khi bắt tay vào làm một bài tập lớn hoặc dự án môn học, bạn thích cách tiếp cận nào?", a: "Lập kế hoạch phân chia công việc và chốt hạn chót (deadline) rõ ràng từng chặng.", av: "J", b: "Làm việc linh hoạt theo cảm hứng, tùy chỉnh các bước dựa theo thực tế triển khai.", bv: "P" },
+            { category: "JP", q: "Trong một buổi hẹn đi chơi, dã ngoại cùng bạn bè, bạn thường là người:", a: "Luôn đến đúng giờ đã hẹn hoặc chủ động đến sớm vài phút để chuẩn bị.", av: "J", b: "Thong thả, linh hoạt về thời gian, đôi khi đến muộn do phát sinh bất ngờ.", bv: "P" },
+            { category: "JP", q: "Ngay sau khi hoàn thành buổi thi cuối cùng và bước ra khỏi phòng thi, phản ứng của bạn là:", a: "Giữ tài liệu để dò lại đáp án với bạn bè, nhẩm tính thử xem mình được bao nhiêu điểm.", av: "J", b: "Xem như xong nhiệm vụ, lập tức cất gọn tài liệu để đầu óc thảnh thơi đi chơi.", bv: "P" },
+            { category: "JP", q: "Khi cùng nhóm bạn thân lên kế hoạch cho một chuyến đi chơi cuối tuần, bạn thích cách làm nào?", a: "Chốt trước lịch trình cụ thể: Địa điểm ăn uống, thời gian di chuyển, chi phí dự kiến.", av: "J", b: "Tùy cơ ứng biến: Chỉ chốt ngày đi và điểm đến chính, còn lại đi đến đâu tính đến đó.", bv: "P" },
+            { category: "JP", q: "Kỹ năng nào trong học tập và công việc mà bạn mong muốn mình sở hữu và thành thạo hơn?", a: "Tổ chức và quản lý công việc bài bản, có phương pháp và hệ thống rõ ràng.", av: "J", b: "Dễ dàng thích ứng, xoay chuyển tình thế và linh hoạt ứng biến trước thay đổi.", bv: "P" },
+            { category: "JP", q: "Khi nhóm đã thống nhất xong phương án triển khai bài tập lớn, bạn đánh giá cao lối làm việc nào?", a: "Đảm bảo tính cam kết: Đã chốt phương án thì tập trung chạy đúng lịch, tránh thay đổi.", av: "J", b: "Đảm bảo tính cập nhật: Kế hoạch là định hướng, có ý tưởng tốt hơn sẵn sàng điều chỉnh.", bv: "P" },
+            { category: "JP", q: "Khi đăng ký học phần hoặc chọn nhóm bài tập, bạn cảm thấy thoải mái, nhẹ nhõm nhất khi nào?", a: "Khi mọi thứ đã chốt xong xuôi, hệ thống ghi nhận thành công và không cần lo nghĩ.", av: "J", b: "Khi mọi thứ đang trong giai đoạn tìm hiểu, vì bạn thấy tự do khi còn nhiều lựa chọn.", bv: "P" },
+            { category: "JP", q: "Khi mới thành lập một nhóm bài tập lớn, bạn mong muốn thiết lập cách phối hợp thế nào?", a: "Thống nhất quy tắc rõ ràng: Bàn bạc trước về lịch trình, phân chia công việc để cam kết.", av: "J", b: "Linh hoạt theo tiến độ: Bắt tay làm tự nhiên, phân chia tương đối rồi điều chỉnh dần.", bv: "P" },
+            { category: "JP", q: "Khi lưu trữ tài liệu học tập, slide bài giảng trên máy tính, bạn thường có thói quen:", a: "Phân loại theo thư mục rõ ràng: Chia theo học kỳ, môn học, đặt tên file có quy tắc.", av: "J", b: "Lưu trữ linh hoạt: Thường để chung ở mục lớn hoặc dùng thanh Search để tìm khi cần.", bv: "P" },
+            { category: "JP", q: "Khi lựa chọn tham gia một hoạt động giải trí ngoài giờ học cùng bạn bè, kiểu trải nghiệm nào thu hút bạn?", a: "Trải nghiệm có lịch trình: Thời gian, địa điểm, các hoạt động đều được lên lịch sẵn chu đáo.", av: "J", b: "Trải nghiệm ngẫu hứng: Tập hợp bất ngờ theo lời rủ đột xuất, đi đến đâu tính đến đó.", bv: "P" }
+        ];
+
+        const resultDatabase = {
+            "INTJ": { tagline: "Nhà Chiến Lược Tài Ba", learning: "Bạn có tư duy hệ thống rất sâu sắc. Hãy tập trung vào việc hiểu bản chất cốt lõi của môn học (ví dụ: kiến trúc bộ nhớ khi học C/C++, bản chất định lý khi học Toán). Tránh học vẹt code mẫu.", stress: "Bạn dễ căng thẳng khi kế hoạch bị xáo trộn. Hãy áp dụng kỹ thuật Pomodoro và chủ động quản lý các biến số bằng kế hoạch dự phòng." },
+            "INTP": { tagline: "Nhà Tư Duy Lập Dị", learning: "Bạn học tốt nhất khi được tự do khám phá. Hãy thử thách bản thân bằng các bài toán khó hoặc tự phát triển một ứng dụng nhỏ từ con số 0 để tăng tính kích thích tư duy.", stress: "Bạn dễ bị stress khi bị gò bó vào quy trình rập khuôn. Hãy tìm không gian yên tĩnh và cho phép bản thân nghỉ ngơi khi luồng suy nghĩ bị quá tải." },
+            "ENTJ": { tagline: "Nhà Điều Hành Quyết Đoán", learning: "Bạn học hiệu quả nhất thông qua việc quản trị và tổ chức. Hãy nhận vai trò trưởng nhóm bài tập lớn để vừa hệ thống hóa kiến thức, vừa thúc đẩy tiến độ công việc.", stress: "Áp lực từ việc kiểm soát tiến độ dễ khiến bạn bực bội. Hãy tập cách tin tưởng, ủy quyền cho đồng đội và tham gia các hoạt động thể thao để xả bớt năng lượng nén." },
+            "ENTP": { tagline: "Nhà Phát Minh Tầm Nhìn", learning: "Bạn bị thu hút bởi sự đổi mới. Hãy học qua việc tranh luận, thảo luận nhóm hoặc tìm các cách giải đề hoàn toàn mới khác biệt với slide bài giảng của thầy cô.", stress: "Bạn dễ chán nản với các công việc lặp đi lặp lại. Hãy chia nhỏ nhiệm vụ và xen kẽ các chủ đề mới để giữ lửa sáng tạo." },
+            "INFJ": { tagline: "Nhà Bảo Vệ Lý Tưởng", learning: "Bạn cần tìm ra ý nghĩa sâu xa của môn học để có động lực. Hãy liên kết các kiến thức toán hay lập trình với những giá trị thực tế mang lại lợi ích cho con người.", stress: "Bạn dễ bị quá tải cảm xúc khi môi trường nhóm xung đột. Hãy dành không gian riêng để 'sạc' lại năng lượng và thực hành thiền hoặc viết nhật ký." },
+            "INFP": { tagline: "Nhà Hòa Giải Mơ Mộng", learning: "Bạn học tốt nhất trong môi trường không áp lực và giàu tính cá nhân. Hãy cá nhân hóa không gian học tập và sử dụng sơ đồ tư duy nhiều màu sắc để tiếp thu kiến thức.", stress: "Sự chỉ trích gay gắt sẽ làm bạn kiệt quệ tinh thần. Hãy học cách tách biệt bản thân khỏi lời phê bình mang tính công việc và tìm đến bạn thân để chia sẻ." },
+            "ENFJ": { tagline: "Nhà Lãnh Đạo Truyền Cảm Hứng", learning: "Bạn học rất nhanh khi được giảng giải hoặc hỗ trợ người khác học tập. Hãy tham gia các nhóm học tập và đóng vai trò người kết nối, hướng dẫn các thành viên yếu hơn.", stress: "Bạn hay ôm đồm cảm xúc của người khác. Hãy học cách từ chối những lời nhờ vả không thiết thực để bảo vệ quỹ thời gian cá nhân." },
+            "ENFP": { tagline: "Nhà Truyền Phong Cách", learning: "Bạn cần sự hào hứng và trải nghiệm mới. Hãy biến việc học thành trò chơi (gamification), đổi địa điểm học tập thường xuyên (quán cà phê, thư viện) để kích thích não bộ.", stress: "Sự gò bó kỷ luật quá mức khiến bạn ngột ngạt. Hãy xả stress bằng âm nhạc, hội họa hoặc một chuyến đi chơi ngẫu hứng cùng bạn bè." },
+            "ISTJ": { tagline: "Nhà Logistíc Thực Tế", learning: "Bạn là bậc thầy của sự kiên trì và quy trình. Hãy bám sát đề cương chi tiết, học tuần tự từng chương và làm đầy đủ bài tập mẫu. Sự ổn định là chìa khóa của bạn.", stress: "Bạn stress khi mọi thứ không rõ ràng, mập mờ. Hãy chủ động xin giảng viên tiêu chí chấm điểm rõ ràng và chuẩn bị bài trước khi lên lớp." },
+            "ISFJ": { tagline: "Nhà Nuôi Dưỡng Tận Tụy", learning: "Bạn học tốt khi có lộ trình rõ ràng và môi trường hòa nhã. Việc ghi chép bài vở sạch sẽ, ngăn nắp bằng tay giúp bạn khắc sâu kiến thức toán đại cương cực tốt.", stress: "Bạn dễ bị kiệt sức vì luôn gánh vác phần việc nặng thay người khác. Hãy thiết lập ranh giới công việc rõ ràng trong các dự án làm việc nhóm." },
+            "ESTJ": { tagline: "Nhà Quản Lý Hiệu Năng", learning: "Bạn học thông qua thực chứng và cấu trúc rõ ràng. Hãy lập danh sách việc cần làm (To-do list) và tận dụng các công cụ quản lý dự án để tối ưu hóa thời gian học tập.", stress: "Sự thiếu hiệu quả của người khác khiến bạn ức chế. Hãy giải tỏa bằng cách chạy bộ, tập gym hoặc tham gia các hoạt động võ thuật rèn luyện thể lực." },
+            "ESFJ": { tagline: "Nhà Đồng Hành Ấm Áp", learning: "Bạn học tốt nhất khi có sự tương tác trực tiếp và phản hồi tích cực. Việc học nhóm cố định từ 2-3 người bạn hợp gu sẽ giúp điểm số của bạn bứt phá.", stress: "Cảm giác bị cô lập hoặc không được công nhận làm bạn tụt năng lượng. Hãy chủ động giao lưu với các câu lạc bộ để tìm kiếm vòng tròn kết nối tích cực." },
+            "ISTP": { tagline: "Nhà Kỹ Nghệ Linh Hoạt", learning: "Bạn là người học qua hành động thực tế (Hands-on). Hãy cài đặt ngay phần mềm về máy, gõ code trực tiếp và sửa lỗi (debug) thực tế thay vì chỉ đọc lý thuyết suông.", stress: "Sự lý thuyết vĩ mô làm bạn chán nản. Hãy tìm các ứng dụng thực tế của bài toán đó hoặc tháo lắp, mày mò một thiết bị công nghệ để cân bằng lại." },
+            "ISFP": { tagline: "Nhà Nghệ Sĩ Tài Hoa", learning: "Bạn có gu thẩm mỹ và nhạy bén với thực tại. Hãy ứng dụng tư duy thiết kế hình ảnh vào các bài slide thuyết trình hoặc sơ đồ hóa các thuật toán phức tạp.", stress: "Áp lực thi cử dồn dập dễ khiến bạn nghẹt thở. Hãy đi dạo ngoài trời, hòa mình vào thiên nhiên hoặc chơi một nhạc cụ để giải phóng tâm trí." },
+            "ESTP": { tagline: "Nhà Doanh Nhân Thực Trường", learning: "Bạn học cực nhanh từ các tình huống khủng hoảng thực tế. Hãy tham gia các cuộc thi giải quyết vấn đề nhanh, các dự án ngắn hạn mang tính thực chiến cao.", stress: "Phải ngồi im nghe giảng bài lý thuyết quá lâu là một cực hình đối với bạn. Hãy vận động nhẹ giữa các giờ học để duy trì sự tỉnh táo cho não bộ." },
+            "ESFP": { tagline: "Nhà Trình Diễn Đầy Năng Lượng", learning: "Bạn học qua sự vui vẻ và giao tiếp. Hãy tham gia thảo luận sôi nổi trên lớp, thuyết trình trước đám đông để biến kiến thức môn học thành trải nghiệm cá nhân sinh động.", stress: "Không gian tẻ nhạt, cô độc khiến bạn trầm uất. Hãy kết nối ngay với bạn bè, tham gia một buổi nhảy hiện đại hoặc một hoạt động thể thao tập thể." }
+        };
+
+        let shuffledQuestions = [];
+        let currentStep = 0; 
+        const questionsPerPage = 10;
+        let isPushingState = true;
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // 4. ĐIỀU HƯỚNG CHUYỂN ĐỔI VIEW (ĐÃ TÍCH HỢP QUẢN LÝ NÚT BACK)
+        const homeView = document.getElementById('home-view');
+        const instructionsView = document.getElementById('instructions-view');
+        const quizView = document.getElementById('quiz-view');
+        const resultView = document.getElementById('result-view');
+
+        function showView(view) {
+            homeView.style.display = view === 'home' ? 'block' : 'none';
+            instructionsView.style.display = view === 'instructions' ? 'block' : 'none';
+            quizView.style.display = view === 'quiz' ? 'block' : 'none';
+            resultView.style.display = view === 'result' ? 'block' : 'none';
+            
+            if (view === 'result') {
+                document.getElementById('disclaimer-modal').style.display = 'flex';
+            }
+            
+            if (isPushingState) {
+                history.pushState({ view: view }, "", view === 'home' ? window.location.pathname : `?page=${view}`);
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        document.getElementById('nav-home').addEventListener('click', (e) => { e.preventDefault(); showView('home'); });
+        document.getElementById('nav-logo').addEventListener('click', () => showView('home'));
+
+        const goToInstructionsAction = (e) => {
+            if(e) e.preventDefault();
+            showView('instructions');
+        };
+        document.getElementById('nav-quiz').addEventListener('click', goToInstructionsAction);
+        document.getElementById('start-quiz-btn').addEventListener('click', goToInstructionsAction);
+
+        document.getElementById('confirm-start-btn').addEventListener('click', () => {
+            initQuiz();
+            showView('quiz');
+        });
+
+        // 5. KHỞI TẠO VÀ RENDER THEO CỤM 10 CÂU
+        function initQuiz() {
+            shuffledQuestions = shuffleArray([...rawQuestions]);
+            shuffledQuestions.forEach(q => q.userAnswer = null);
+            currentStep = 0; 
+            renderQuizStep();
+        }
+
+        function renderQuizStep() {
+            const container = document.getElementById('quiz-questions-render');
+            container.innerHTML = ""; 
+
+            const startIndex = currentStep * questionsPerPage;
+            const endIndex = Math.min(startIndex + questionsPerPage, shuffledQuestions.length);
+
+            const stepWrapper = document.createElement('div');
+            stepWrapper.style.animation = "fadeIn 0.4s ease-in-out";
+
+            for (let i = startIndex; i < endIndex; i++) {
+                const item = shuffledQuestions[i];
+                const card = document.createElement('div');
+                card.className = 'quiz-card';
+                card.innerHTML = `
+                    <h3>Câu hỏi ${i + 1}: ${item.q}</h3>
+                    <div class="options">
+                        <label class="option-container">
+                            <input type="radio" name="question_${i}" value="${item.av}" ${item.userAnswer === item.av ? 'checked' : ''}>
+                            <span class="checkmark"></span>
+                            ${item.a}
+                        </label>
+                        <label class="option-container">
+                            <input type="radio" name="question_${i}" value="${item.bv}" ${item.userAnswer === item.bv ? 'checked' : ''}>
+                            <span class="checkmark"></span>
+                            ${item.b}
+                        </label>
+                    </div>
+                `;
+                stepWrapper.appendChild(card);
+            }
+
+            const navigationDiv = document.createElement('div');
+            navigationDiv.style.cssText = "margin-top: 40px; display: flex; justify-content: space-between; align-items: center; padding-bottom: 20px;";
+            
+            const isFirstStep = currentStep === 0;
+            const isLastStep = currentStep === Math.ceil(shuffledQuestions.length / questionsPerPage) - 1;
+
+            navigationDiv.innerHTML = `
+                <button id="prev-step-btn" class="btn-primary" style="background: #718096; padding: 12px 28px;" ${isFirstStep ? 'disabled style="opacity:0.4; cursor:not-allowed;"' : ''}>Quay lại trang trước</button>
+                ${isLastStep 
+                    ? `<button id="submit-quiz-btn" class="btn-submit" style="padding: 12px 35px;">Xem Kết Quả Của Tôi</button>`
+                    : `<button id="next-step-btn" class="btn-primary" style="padding: 12px 35px;">Tiếp theo (Trang ${currentStep + 2}/4)</button>`
+                }
+            `;
+            
+            stepWrapper.appendChild(navigationDiv);
+            container.appendChild(stepWrapper);
+
+            const inputs = stepWrapper.querySelectorAll('input[type="radio"]');
+            inputs.forEach(input => {
+                input.addEventListener('change', () => {
+                    saveAnswersFromDOM();
+                    updateProgressBar();
+                });
+            });
+
+            if (!isFirstStep) {
+                document.getElementById('prev-step-btn').addEventListener('click', () => {
+                    saveAnswersFromDOM();
+                    currentStep--;
+                    renderQuizStep();
+                    window.scrollTo({ top: document.getElementById('quiz-section').offsetTop - 80, behavior: 'smooth' });
+                });
+            }
+
+            if (!isLastStep) {
+                document.getElementById('next-step-btn').addEventListener('click', () => {
+                    if (validateCurrentStep()) {
+                        saveAnswersFromDOM();
+                        currentStep++;
+                        renderQuizStep();
+                        window.scrollTo({ top: document.getElementById('quiz-section').offsetTop - 80, behavior: 'smooth' });
+                    }
+                });
+            } else {
+                document.getElementById('submit-quiz-btn').addEventListener('click', processFinalResults);
+            }
+
+            updateProgressBar();
+        }
+
+        function saveAnswersFromDOM() {
+            const startIndex = currentStep * questionsPerPage;
+            const endIndex = Math.min(startIndex + questionsPerPage, shuffledQuestions.length);
+
+            for (let i = startIndex; i < endIndex; i++) {
+                const checkedOption = document.querySelector(`input[name="question_${i}"]:checked`);
+                if (checkedOption) {
+                    shuffledQuestions[i].userAnswer = checkedOption.value;
+                }
+            }
+        }
+
+        function validateCurrentStep() {
+            const startIndex = currentStep * questionsPerPage;
+            const endIndex = Math.min(startIndex + questionsPerPage, shuffledQuestions.length);
+            let missingQuestions = [];
+
+            for (let i = startIndex; i < endIndex; i++) {
+                const checkedOption = document.querySelector(`input[name="question_${i}"]:checked`);
+                if (!checkedOption) {
+                    missingQuestions.push(i + 1);
+                }
+            }
+
+            if (missingQuestions.length > 0) {
+                alert(`Bạn chưa hoàn thành trang này.\nVui lòng trả lời các câu còn thiếu: Câu ${missingQuestions.join(', ')}`);
+                return false;
+            }
+            return true;
+        }
+
+        function updateProgressBar() {
+            let answeredCount = shuffledQuestions.filter(q => q.userAnswer).length;
+            const percentage = Math.round((answeredCount / shuffledQuestions.length) * 100);
+            document.getElementById('progress-bar').style.width = percentage + '%';
+        }
+
+        function processFinalResults() {
+            saveAnswersFromDOM(); 
+            if (!validateCurrentStep()) return;
+
+            let scores = { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0 };
+            shuffledQuestions.forEach(item => {
+                if (item.userAnswer) {
+                    scores[item.userAnswer]++;
+                }
+            });
+
+            let mbtiResult = "";
+            mbtiResult += scores.E >= scores.I ? "E" : "I";
+            mbtiResult += scores.S >= scores.N ? "S" : "N";
+            mbtiResult += scores.T >= scores.F ? "T" : "F";
+            mbtiResult += scores.J >= scores.P ? "J" : "P";
+
+            const analysis = resultDatabase[mbtiResult] || { tagline: "Người tìm đường", learning: "Hãy tiếp tục khám phá bản thân.", stress: "Giữ tinh thần thoải mái." };
+            
+            document.getElementById('mbti-type').innerText = mbtiResult;
+            document.getElementById('mbti-tagline').innerText = `"${analysis.tagline}"`;
+            document.getElementById('mbti-learning').innerHTML = analysis.learning;
+            document.getElementById('mbti-stress').innerHTML = analysis.stress;
+
+            updateResultStats(scores);
+            showView('result');
+        }
+
+        // ================= XỬ LÝ DEVELOPER MODE BÍ MẬT =================
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'd') {
+                e.preventDefault();
+                const devPanel = document.getElementById('dev-panel');
+                devPanel.style.display = devPanel.style.display === 'none' ? 'block' : 'none';
+            }
+        });
+
+        document.getElementById('dev-auto-fill').addEventListener('click', () => {
+            if (!shuffledQuestions || shuffledQuestions.length === 0) {
+                shuffledQuestions = shuffleArray([...rawQuestions]);
+            }
+
+            shuffledQuestions.forEach(item => {
+                item.userAnswer = Math.random() < 0.5 ? item.av : item.bv;
+            });
+
+            document.getElementById('progress-bar').style.width = '100%';
+
+            let scores = { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0 };
+            shuffledQuestions.forEach(item => {
+                if (item.userAnswer) scores[item.userAnswer]++;
+            });
+
+            let mbtiResult = "";
+            mbtiResult += scores.E >= scores.I ? "E" : "I";
+            mbtiResult += scores.S >= scores.N ? "S" : "N";
+            mbtiResult += scores.T >= scores.F ? "T" : "F";
+            mbtiResult += scores.J >= scores.P ? "J" : "P";
+
+            const analysis = resultDatabase[mbtiResult] || { tagline: "Người tìm đường", learning: "Hãy tiếp tục khám phá bản thân.", stress: "Giữ tinh thần thoải mái." };
+            
+            document.getElementById('mbti-type').innerText = mbtiResult;
+            document.getElementById('mbti-tagline').innerText = `"${analysis.tagline}"`;
+            document.getElementById('mbti-learning').innerHTML = analysis.learning;
+            document.getElementById('mbti-stress').innerHTML = analysis.stress;
+
+            updateResultStats(scores);
+            showView('result');
+            console.log("Dev Mode: Đã tự động hoàn thành 40 câu thành công.");
+        });
+
+        // ================= THỐNG KÊ TỶ LỆ MBTI =================
+        function updateResultStats(scores) {
+            const totalPerGroup = 10;
+            adjustSingleBar('ei', Math.round((scores.E / totalPerGroup) * 100), 'E', 'I', '#4299e1');
+            adjustSingleBar('sn', Math.round((scores.S / totalPerGroup) * 100), 'S', 'N', '#ecc94b');
+            adjustSingleBar('tf', Math.round((scores.T / totalPerGroup) * 100), 'T', 'F', '#48bb78');
+            adjustSingleBar('jp', Math.round((scores.J / totalPerGroup) * 100), 'J', 'P', '#9f7aea');
+        }
+
+        function adjustSingleBar(key, pctLeft, labelLeft, labelRight, colorCode) {
+            const bar = document.getElementById(`bar-${key}`);
+            const dot = document.getElementById(`dot-${key}`);
+            const text = document.getElementById(`text-${key}`);
+
+            if (pctLeft >= 50) {
+                bar.style.width = pctLeft + '%';
+                bar.style.float = 'left';
+                bar.parentElement.style.background = '#e2e8f0';
+                bar.style.backgroundColor = colorCode;
+                dot.style.left = pctLeft + '%';
+                text.style.left = pctLeft + '%';
+                text.innerText = `${pctLeft}% ` + (labelLeft === 'J' ? 'Judging' : labelLeft === 'E' ? 'Extraverted' : labelLeft === 'S' ? 'Sensing' : 'Thinking');
+            } else {
+                let pctRight = 100 - pctLeft;
+                bar.style.width = pctRight + '%';
+                bar.style.float = 'right';
+                bar.parentElement.style.background = colorCode;
+                bar.style.backgroundColor = '#e2e8f0';
+                dot.style.left = pctLeft + '%';
+                text.style.left = pctLeft + '%';
+                text.innerText = `${pctRight}% ` + (labelRight === 'P' ? 'Prospecting' : labelRight === 'I' ? 'Introverted' : labelRight === 'N' ? 'Intuitive' : 'Feeling');
+            }
+        }
+
+        document.getElementById('close-modal-btn').addEventListener('click', () => {
+            const modal = document.getElementById('disclaimer-modal');
+            modal.style.transition = "opacity 0.3s ease";
+            modal.style.opacity = "0";
+            setTimeout(() => {
+                modal.style.display = 'none';
+                modal.style.opacity = "1";
+            }, 300);
+        });
+
+        // ================= XỬ LÝ SỰ KIỆN NÚT BACK CỦA TRÌNH DUYỆT =================
+        window.addEventListener('popstate', function(event) {
+            isPushingState = false;
+            if (event.state && event.state.view) {
+                showView(event.state.view);
+            } else {
+                showView('home');
+            }
+            isPushingState = true;
+        });
+
+        window.addEventListener('DOMContentLoaded', () => {
+            history.replaceState({ view: 'home' }, "", window.location.pathname);
+        });
+    </script>
+</body>
+</html>
