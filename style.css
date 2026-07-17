@@ -612,3 +612,61 @@ footer {
     from { transform: translateY(30px); opacity: 0; }
     to { transform: translateY(0); opacity: 1; }
 }
+/* ==========================================================================
+   RESPONSIVE CHO THIẾT BỊ MOBILE (Màn hình dưới 768px)
+   ========================================================================== */
+@media screen and (max-width: 768px) {
+    
+    /* 1. Chuyển bố cục tổng thể từ hàng ngang thành hàng dọc */
+    body {
+        flex-direction: column;
+        padding: 15px;
+        height: auto; /* Cho phép trang kéo dài theo nội dung */
+        overflow-y: auto; /* Bật cuộn dọc nếu nội dung dài */
+        justify-content: flex-start;
+        gap: 20px;
+    }
+
+    /* 2. Tối ưu khu vực Menu/Cài đặt (Bên trái) */
+    .controls {
+        width: 100%; /* Chiếm hết chiều ngang màn hình */
+        max-width: 100%;
+        padding: 15px;
+        box-sizing: border-box;
+    }
+
+    /* 3. Tối ưu khu vực nội dung chính/Câu hỏi (Bên phải) */
+    .main-content {
+        width: 100%; /* Chiếm hết chiều ngang màn hình */
+        max-width: 100%;
+        padding: 20px 15px;
+        box-sizing: border-box;
+        min-height: 400px; /* Đảm bảo đủ không gian hiển thị */
+    }
+
+    /* 4. Tối ưu các nút bấm (Options) để dễ bấm bằng ngón tay */
+    .options-container {
+        grid-template-columns: 1fr; /* Chuyển thành 1 cột duy nhất nếu đang dùng Grid */
+        gap: 12px;
+    }
+
+    .option-btn {
+        padding: 15px; /* Tăng khoảng trống bên trong để dễ chạm (Touch target) */
+        font-size: 15px; /* Điều chỉnh font chữ vừa vặn */
+        width: 100%;
+    }
+
+    /* 5. Tối ưu hàng nút điều hướng (Dưới cùng) */
+    .navigation-buttons {
+        flex-direction: row; /* Giữ nguyên hàng ngang */
+        justify-content: space-between;
+        width: 100%;
+        gap: 10px;
+    }
+
+    .nav-btn {
+        flex: 1; /* Hai nút bấm (Trước/Sau) sẽ chia đều không gian bằng nhau */
+        padding: 12px;
+        text-align: center;
+    }
+}
