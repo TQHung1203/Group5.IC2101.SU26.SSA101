@@ -669,4 +669,107 @@ footer {
         padding: 12px;
         text-align: center;
     }
+    /* ==========================================
+   BỘ CODE TỐI ƯU GIAO DIỆN DI ĐỘNG (MOBILE)
+   ========================================== */
+
+/* 1. Đảm bảo toàn bộ khung trang web không bị phình ngang trên điện thoại */
+html, body {
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+    box-sizing: border-box;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+/* 2. Cấu hình quy chuẩn Responsive cho màn hình dưới 768px */
+@media screen and (max-width: 768px) {
+    
+    /* --- NAVBAR: Cho phép các nút rớt dòng gọn gàng, không tràn mép --- */
+    .navbar, nav {
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        gap: 6px !important;
+        padding: 8px 5px !important;
+        width: 100% !important;
+    }
+    
+    .navbar a, nav a, .nav-btn {
+        font-size: 13px !important;
+        padding: 6px 10px !important;
+        white-space: normal !important; /* Cho phép rớt chữ nếu nút dài */
+        text-align: center;
+    }
+
+    /* --- KHUNG CHỨA CHÍNH: Co giãn vừa vặn màn hình điện thoại --- */
+    .container, .main-content, section {
+        width: 95% !important;
+        max-width: 100% !important;
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+        margin: 0 auto !important;
+    }
+
+    /* --- CÁC THẺ KẾT QUẢ KÉP (DUAL-CARD): Ép xếp dọc thay vì nằm ngang --- */
+    .result-cards-container, .dual-card-wrapper, .card-grid {
+        display: flex !important;
+        flex-direction: column !important; /* Chuyển từ hàng ngang thành hàng dọc */
+        gap: 15px !important;
+        width: 100% !important;
+    }
+
+    .result-card, .card {
+        width: 100% !important;
+        margin-right: 0 !important;
+        margin-left: 0 !important;
+        box-sizing: border-box !important;
+    }
+
+    /* --- THANH ĐỒ THỊ MBTI (PERCENTAGE BARS): Tối ưu cho màn hình nhỏ --- */
+    .bar-row, .mbti-bar-item {
+        flex-direction: column !important; /* Đẩy tên thuộc tính lên trên thanh màu */
+        align-items: flex-start !important;
+        gap: 5px !important;
+        margin-bottom: 20px !important;
+    }
+
+    .bar-label-left, .bar-label-right, .mbti-label {
+        font-size: 13px !important;
+        font-weight: 600;
+    }
+
+    .bar-container, .bar-outer {
+        width: 100% !important;
+        height: 18px !important; /* Tăng độ dày nhẹ cho dễ nhìn trên điện thoại */
+    }
+
+    /* --- TRẮC NGHIỆM (QUIZ): Tăng diện tích vuốt chạm ngón tay --- */
+    .quiz-question-card, .question-box {
+        padding: 15px 10px !important;
+    }
+
+    .question-title, .question-text {
+        font-size: 15px !important;
+        line-height: 1.4 !important;
+    }
+
+    .option-btn, .quiz-option, label.option-label {
+        display: block !important;
+        width: 100% !important;
+        padding: 12px 10px !important;
+        margin-bottom: 10px !important;
+        font-size: 14px !important;
+        border-radius: 8px !important;
+    }
+
+    /* --- MODAL BANNER / DISCLAIMER: Không bị trôi mất nút bấm --- */
+    .modal-content, .disclaimer-box {
+        width: 90% !important;
+        max-width: 350px !important;
+        padding: 20px 15px !important;
+        margin: 10% auto !important;
+    }
+}
 }
